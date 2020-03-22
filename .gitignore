@@ -1,0 +1,12 @@
+# .v4p backup files
+*~.xml
+
+# Dynamic plugins .dll
+bin/
+
+#Houdini backup directory
+backup/
+
+#export for unity
+export/shaders/
+*.mat
