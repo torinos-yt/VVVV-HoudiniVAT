@@ -39,7 +39,7 @@ void GetAttributeFromTexture(out float3 position, out float3 normal, float2 uv)
 	float FPS = 24.0;
 	float FPS_div_Frames = FPS / nFrames;
 	
-	float t = min(time, .999) * (1 / FPS) * nFrames;
+	float t = min(time, .99) * (1 / FPS) * nFrames;
 	
 	float timeInFrames = frac(FPS_div_Frames * t);
 	
