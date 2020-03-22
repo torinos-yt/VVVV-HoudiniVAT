@@ -34,12 +34,18 @@ struct vs2gs
 	float2 UV: TEXCOORD0;
 };
 
-void GetAttributeFromTexture(inout float3 position, out float3 normal, float2 uv)
+struct VATAttribute
+{
+	float3 pos;
+	float3 norm;
+};
+
+VATAttribute GetAttributeFromTexture(float2 uv)
 {
 	float FPS = 24.0;
 	float FPS_div_Frames = FPS / nFrames;
 	
-	float t = min(time, .999) * (1 / FPS) * nFrames;
+	float t = min(time, .99) * (1 / FPS) * nFrames;
 	
 	float timeInFrames = frac(FPS_div_Frames * t);
 	
@@ -54,7 +60,6 @@ void GetAttributeFromTexture(inout float3 position, out float3 normal, float2 uv
 	float expand = posMax - posMin;
 	texturePos.xyz *= expand;
 	texturePos.xyz += posMin;
-	position = position + texturePos.xzy;
 	
 	float alpha = texturePos.w * 1024;
 	float2 f2;
@@ -69,10 +74,14 @@ void GetAttributeFromTexture(inout float3 position, out float3 normal, float2 uv
 	f3.z = 1 - (f2dot / 2.0);
 	f3 = clamp(f3, -1.0, 1.0);
 	f3.x = 1 - f3.x;
-	normal = f3.xzy;
+
+	VATAttribute o;
+	o.pos = texturePos.xzy;
+	o.norm = f3.xzy;
+	return o;
 }
 
-vs2gs VS(vsin input)
+vs2gs VS_Fluid(vsin input)
 {
 	vs2gs Out;
 	
@@ -82,25 +91,65 @@ vs2gs VS(vsin input)
 	Out.Binormal = input.Binormal;
 	Out.UV = input.UV;
 	
+	VATAttribute v;
+	
 #if defined(TWOUV)
-	GetAttributeFromTexture(Out.PosO, Out.Normal, input.UV2);
+	v = GetAttributeFromTexture(input.UV2);
+	Out.PosO = v.pos;
+	Out.Normal = v.norm;
 #else
-	GetAttributeFromTexture(Out.PosO, Out.Normal, input.UV);
+	v = GetAttributeFromTexture(input.UV);
+	Out.PosO = v.pos;
+	Out.Normal = v.norm;
+#endif
+	
+    return Out;
+}
+
+vs2gs VS_Soft(vsin input)
+{
+	vs2gs Out;
+	
+	Out.PosO = input.PosO;
+	Out.Normal = input.Normal;
+	Out.Tangent = input.Tangent;
+	Out.Binormal = input.Binormal;
+	Out.UV = input.UV;
+	
+	VATAttribute v;
+	
+#if defined(TWOUV)
+	v = GetAttributeFromTexture(input.UV2);
+	Out.PosO += v.pos;
+	Out.Normal = v.norm;
+#else
+	v = GetAttributeFromTexture(input.UV);
+	Out.PosO += v.pos;
+	Out.Normal = v.norm;
 #endif
 	
     return Out;
 }
 
 
-GeometryShader StreamOutGS = ConstructGSWithSO( CompileShader( vs_5_0, VS() ), "POSITION.xyz;NORMAL.xyz;TANGENT.xyz;BINORMAL.xyz;TEXCOORD.xy", NULL,NULL,NULL,-1 );
-//if the above does not work, try this line instead
-//GeometryShader StreamOutGS = ConstructGSWithSO( CompileShader( vs_4_0, VS() ), "POSITION.xyz;NORMAL.xyz;TEXCOORD.xy" );
+GeometryShader StreamOutGS_Fluid = ConstructGSWithSO( CompileShader( vs_5_0, VS_Fluid() ), "POSITION.xyz;NORMAL.xyz;TANGENT.xyz;BINORMAL.xyz;TEXCOORD.xy", NULL,NULL,NULL,-1 );
+GeometryShader StreamOutGS_Soft = ConstructGSWithSO( CompileShader( vs_5_0, VS_Soft() ), "POSITION.xyz;NORMAL.xyz;TANGENT.xyz;BINORMAL.xyz;TEXCOORD.xy", NULL,NULL,NULL,-1 );
 
-technique10 PassMesh
+technique10 Soft
 {
     pass PP2
     {
-        SetVertexShader( CompileShader( vs_5_0, VS() ) );
-        SetGeometryShader( StreamOutGS );
+        SetVertexShader( CompileShader( vs_5_0, VS_Soft() ) );
+        SetGeometryShader( StreamOutGS_Soft );
     }  
 }
+
+technique10 Fluid
+{
+    pass PP2
+    {
+        SetVertexShader( CompileShader( vs_5_0, VS_Fluid() ) );
+        SetGeometryShader( StreamOutGS_Fluid );
+    }  
+}
+

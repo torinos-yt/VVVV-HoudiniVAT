@@ -360,12 +360,30 @@
    <PIN pinname="Descriptive Name" slicecount="1" values="time">
    </PIN>
    </NODE>
-   <NODE systemname="VertexAnimationTexture_Fluid" filename="module\VertexAnimationTexture_Fluid.v4p" nodename="module\VertexAnimationTexture_Fluid.v4p" componentmode="Hidden" id="60">
-   <BOUNDS type="Node" left="5017" top="4310" width="3150" height="270">
+   <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="66">
+   <BOUNDS type="Box" left="7665" top="3735" width="765" height="270">
    </BOUNDS>
-   <BOUNDS type="Box" left="1120" top="1858" width="7795" height="4905">
+   <BOUNDS type="Node" left="7665" top="3735" width="0" height="0">
    </BOUNDS>
-   <BOUNDS type="Window" left="8820" top="7470" width="11925" height="6615">
+   <PIN pinname="Input Enum" slicecount="1" visible="1" values="Fluid">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="Soft">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Technique">
+   </PIN>
+   </NODE>
+   <NODE id="60" componentmode="Hidden" systemname="VertexAnimationTexture" filename="module\VertexAnimationTexture.v4p" nodename="module\VertexAnimationTexture.v4p">
+   <BOUNDS type="Node" left="5017" top="4175" width="3585" height="270">
+   </BOUNDS>
+   <BOUNDS type="Box" left="1120" top="1723" width="7795" height="4905">
+   </BOUNDS>
+   <PIN pinname="Technique" visible="1">
+   </PIN>
+   <BOUNDS type="Window" left="7605" top="5895" width="11925" height="6615">
    </BOUNDS>
    <PIN pinname="Geometry Out" visible="1" slicecount="1" values="||">
    </PIN>
@@ -376,38 +394,40 @@
    <PIN pinname="time" visible="1">
    </PIN>
    </NODE>
-   <LINK srcnodeid="11" srcpinname="Output" dstnodeid="60" dstpinname="Geometry In" linkstyle="Bezier">
-   <LINKPOINT x="1050" y="3593">
-   </LINKPOINT>
-   <LINKPOINT x="5010" y="3593">
-   </LINKPOINT>
+   <LINK srcnodeid="66" srcpinname="Output Enum" dstnodeid="60" dstpinname="Technique">
    </LINK>
-   <LINK srcnodeid="48" srcpinname="numOfFrames" dstnodeid="60" dstpinname="numOfFrames" linkstyle="Bezier">
-   <LINKPOINT x="5475" y="3375">
-   </LINKPOINT>
-   <LINKPOINT x="5475" y="3375">
-   </LINKPOINT>
-   </LINK>
-   <LINK srcnodeid="48" srcpinname="posMin" dstnodeid="60" dstpinname="posMin" linkstyle="Bezier">
-   <LINKPOINT x="5910" y="3375">
-   </LINKPOINT>
-   <LINKPOINT x="5910" y="3375">
-   </LINKPOINT>
-   </LINK>
-   <LINK srcnodeid="48" srcpinname="posMax" dstnodeid="60" dstpinname="posMax" linkstyle="Bezier">
-   <LINKPOINT x="6360" y="3375">
-   </LINKPOINT>
-   <LINKPOINT x="6360" y="3375">
-   </LINKPOINT>
-   </LINK>
-   <LINK srcnodeid="13" srcpinname="Buffers" dstnodeid="60" dstpinname="posTex" linkstyle="Bezier">
-   <LINKPOINT x="10380" y="3360">
-   </LINKPOINT>
-   <LINKPOINT x="6840" y="3360">
-   </LINKPOINT>
+   <LINK srcnodeid="60" srcpinname="Geometry Out" dstnodeid="1" dstpinname="Geometry">
    </LINK>
    <LINK srcnodeid="65" srcpinname="Y Output Value" dstnodeid="60" dstpinname="time">
    </LINK>
-   <LINK srcnodeid="60" srcpinname="Geometry Out" dstnodeid="1" dstpinname="Geometry">
+   <LINK srcnodeid="13" srcpinname="Buffers" dstnodeid="60" dstpinname="posTex" linkstyle="Bezier">
+   <LINKPOINT x="10380" y="3315">
+   </LINKPOINT>
+   <LINKPOINT x="6840" y="3270">
+   </LINKPOINT>
+   </LINK>
+   <LINK srcnodeid="48" srcpinname="posMax" dstnodeid="60" dstpinname="posMax" linkstyle="Bezier">
+   <LINKPOINT x="6360" y="3330">
+   </LINKPOINT>
+   <LINKPOINT x="6360" y="3285">
+   </LINKPOINT>
+   </LINK>
+   <LINK srcnodeid="48" srcpinname="posMin" dstnodeid="60" dstpinname="posMin" linkstyle="Bezier">
+   <LINKPOINT x="5910" y="3330">
+   </LINKPOINT>
+   <LINKPOINT x="5910" y="3285">
+   </LINKPOINT>
+   </LINK>
+   <LINK srcnodeid="48" srcpinname="numOfFrames" dstnodeid="60" dstpinname="numOfFrames" linkstyle="Bezier">
+   <LINKPOINT x="5475" y="3330">
+   </LINKPOINT>
+   <LINKPOINT x="5475" y="3285">
+   </LINKPOINT>
+   </LINK>
+   <LINK srcnodeid="11" srcpinname="Output" dstnodeid="60" dstpinname="Geometry In" linkstyle="Bezier">
+   <LINKPOINT x="1050" y="3548">
+   </LINKPOINT>
+   <LINKPOINT x="5010" y="3503">
+   </LINKPOINT>
    </LINK>
    </PATCH>

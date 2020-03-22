@@ -347,11 +347,11 @@
    <LINK srcnodeid="1" srcpinname="Layout Valid" dstnodeid="64" dstpinname="Y Input Value">
    </LINK>
    <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="65" systemname="IOBox (Value Advanced)">
-   <BOUNDS type="Box" left="7230" top="3165" width="795" height="240">
+   <BOUNDS type="Box" left="7215" top="3165" width="795" height="240">
    </BOUNDS>
-   <BOUNDS type="Node" left="7230" top="3165" width="0" height="0">
+   <BOUNDS type="Node" left="7215" top="3165" width="0" height="0">
    </BOUNDS>
-   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="0.88">
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="1">
    </PIN>
    <PIN pinname="Units" slicecount="1" values="||">
    </PIN>
@@ -360,8 +360,8 @@
    <PIN pinname="Descriptive Name" slicecount="1" values="time">
    </PIN>
    </NODE>
-   <NODE systemname="VertexAnimationTexture_Soft" filename="module\VertexAnimationTexture_Soft.v4p" nodename="module\VertexAnimationTexture_Soft.v4p" componentmode="Hidden" id="60">
-   <BOUNDS type="Node" left="5017" top="4310" width="3150" height="270">
+   <NODE systemname="VertexAnimationTexture" filename="module\VertexAnimationTexture.v4p" nodename="module\VertexAnimationTexture.v4p" componentmode="Hidden" id="60">
+   <BOUNDS type="Node" left="5017" top="4310" width="3570" height="270">
    </BOUNDS>
    <BOUNDS type="Box" left="1120" top="1858" width="7795" height="4905">
    </BOUNDS>
@@ -374,6 +374,8 @@
    <PIN pinname="Max Elements" slicecount="1" values="0">
    </PIN>
    <PIN pinname="time" visible="1">
+   </PIN>
+   <PIN pinname="Technique" slicecount="1" visible="1" values="Soft">
    </PIN>
    </NODE>
    <LINK srcnodeid="11" srcpinname="Output" dstnodeid="60" dstpinname="Geometry In" linkstyle="Bezier">
@@ -409,5 +411,23 @@
    <LINK srcnodeid="65" srcpinname="Y Output Value" dstnodeid="60" dstpinname="time">
    </LINK>
    <LINK srcnodeid="60" srcpinname="Geometry Out" dstnodeid="1" dstpinname="Geometry">
+   </LINK>
+   <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="66">
+   <BOUNDS type="Box" left="7650" top="3855" width="1590" height="270">
+   </BOUNDS>
+   <BOUNDS type="Node" left="7650" top="3855" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Input Enum" slicecount="1" visible="1" values="Soft">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="Soft">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Technique">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="66" srcpinname="Output Enum" dstnodeid="60" dstpinname="Technique">
    </LINK>
    </PATCH>
