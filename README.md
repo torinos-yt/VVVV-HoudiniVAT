@@ -10,7 +10,7 @@ SideFX Labs 412
 exrの読み込みに[VVVV.Packs.Image](https://vvvv.org/contribution/vvvv.packs.image)が必要です。
 # 使い方-Houdini側
 SideFX Labsをインストールし、Labs Vertex Animetion Texturesノードを使用し、VATを出力します。  
-詳しいことは[この辺り](https://houdinifx.jp/blog/vertex-animation-texture-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/)を参照してください。基本的には、ジオメトリに応じて、解像度をいじる以外はそのままで大丈夫だと思います。
+詳しいことは[この辺り](https://houdinifx.jp/blog/vertex-animation-texture-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/)や、[この辺り](https://www.youtube.com/watch?v=qXcxBw3KUtw)を参照してください。基本的には、ジオメトリに応じて、解像度をいじる以外はそのままで大丈夫だと思います。
 
 とりあえず現状は、トポロジが変化しない頂点アニメーションの"Soft"とトポロジが変化する頂点アニメーションの"Fluid"に対応しています。  
 
