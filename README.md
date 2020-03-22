@@ -1,4 +1,4 @@
-# HoudiniVAT-VVVV
+# VVVV-HoudiniVAT
 
 HoudiniのVATから出力したジオメトリやテクスチャを、vvvvで読み込んで再生するサンプルです。  
 
